@@ -1,0 +1,11 @@
+[mountpoints]
+data=/data
+boot=/boot
+
+[slot_A]
+boot=/dev/mmcblk0p1
+data=/dev/mmcblk0p4
+
+[slot_B]
+boot=/dev/mmcblk0p1
+data=/dev/mmcblk0p4

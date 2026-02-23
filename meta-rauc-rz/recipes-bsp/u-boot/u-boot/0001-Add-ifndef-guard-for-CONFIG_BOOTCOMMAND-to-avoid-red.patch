@@ -1,0 +1,119 @@
+From 199bdc32ce90ec95dda8696ed1ecdb5c89721fa6 Mon Sep 17 00:00:00 2001
+Upstream-Status: Pending
+From: Filip M <milev.philip@gmail.com>
+Date: Sun, 22 Feb 2026 14:25:18 +0200
+Subject: [PATCH] Add #ifndef guard for CONFIG_BOOTCOMMAND to avoid
+ redefinition
+
+Signed-off-by: Filip M <milev.philip@gmail.com>
+---
+ include/configs/rzg2l-dev.h  | 3 ++-
+ include/configs/rzg2lc-dev.h | 4 ++--
+ include/configs/rzg2ul-dev.h | 3 ++-
+ include/configs/rzg3e-dev.h  | 2 ++
+ include/configs/rzv2h-dev.h  | 3 ++-
+ include/configs/rzv2l-dev.h  | 3 ++-
+ 6 files changed, 12 insertions(+), 6 deletions(-)
+
+diff --git a/include/configs/rzg2l-dev.h b/include/configs/rzg2l-dev.h
+index b4dc9b5484..1d44975ea7 100644
+--- a/include/configs/rzg2l-dev.h
++++ b/include/configs/rzg2l-dev.h
+@@ -47,11 +47,12 @@
+ #define CONFIG_EXTRA_ENV_SETTINGS	\
+ 	"bootm_size=0x10000000\0"
+
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND	\
+ 	"tftp 0x48080000 Image; " \
+ 	"tftp 0x48000000 Image-"CONFIG_DEFAULT_FDT_FILE"; " \
+ 	"booti 0x48080000 - 0x48000000"
+-
++#endif
+ /* For board */
+ /* Ethernet RAVB */
+ #define CONFIG_BITBANGMII_MULTI
+diff --git a/include/configs/rzg2lc-dev.h b/include/configs/rzg2lc-dev.h
+index 51ce78eb13..8657615828 100644
+--- a/include/configs/rzg2lc-dev.h
++++ b/include/configs/rzg2lc-dev.h
+@@ -46,12 +46,12 @@
+ /* ENV setting */
+ #define CONFIG_EXTRA_ENV_SETTINGS	\
+ 	"bootm_size=0x10000000\0"
+-
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND	\
+ 	"tftp 0x48080000 Image; " \
+ 	"tftp 0x48000000 Image-"CONFIG_DEFAULT_FDT_FILE"; " \
+ 	"booti 0x48080000 - 0x48000000"
+-
++#endif
+ /* For board */
+ /* Ethernet RAVB */
+ #define CONFIG_BITBANGMII_MULTI
+diff --git a/include/configs/rzg2ul-dev.h b/include/configs/rzg2ul-dev.h
+index f2d1f2b006..853a05ca3b 100644
+--- a/include/configs/rzg2ul-dev.h
++++ b/include/configs/rzg2ul-dev.h
+@@ -63,11 +63,12 @@
+ #define CONFIG_EXTRA_ENV_SETTINGS	\
+ 	"bootm_size=0x10000000\0"
+
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND	\
+ 	"tftp 0x48080000 Image; " \
+ 	"tftp 0x48000000 Image-"CONFIG_DEFAULT_FDT_FILE"; " \
+ 	"booti 0x48080000 - 0x48000000"
+-
++#endif
+ /* For board */
+ /* Ethernet RAVB */
+ #define CONFIG_BITBANGMII_MULTI
+diff --git a/include/configs/rzg3e-dev.h b/include/configs/rzg3e-dev.h
+index 8a4e101afd..8cdc6b29ae 100644
+--- a/include/configs/rzg3e-dev.h
++++ b/include/configs/rzg3e-dev.h
+@@ -57,7 +57,9 @@
+ 	"emmcload=ext4load mmc 0:2 0x48080000 boot/Image;ext4load mmc 0:2 0x48000000 boot/r9a09g047e57-smarc.dtb;run prodemmcbootargs \0" \
+ 	"sd1load=ext4load mmc 1:2 0x48080000 boot/Image;ext4load mmc 1:2 0x48000000 boot/r9a09g047e57-smarc.dtb;run prodsdbootargs \0" \
+ 	"bootcmd_check=if mmc dev 1; then run sd1load; else run emmcload; fi \0"
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND      "env default -a;run bootcmd_check;run bootimage"
++#endif
+ #else
+ #define CFG_EXTRA_ENV_SETTINGS	\
+ 	"bootm_size=0x10000000\0"
+diff --git a/include/configs/rzv2h-dev.h b/include/configs/rzv2h-dev.h
+index 534499430c..d4255c35f1 100644
+--- a/include/configs/rzv2h-dev.h
++++ b/include/configs/rzv2h-dev.h
+@@ -80,8 +80,9 @@
+ 	"bootcmd_check=if mmc dev 1; then run sd1load; else run sd0load; fi \0"
+ #endif
+
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND	"env default -a;run bootcmd_check;run bootimage"
+-
++#endif
+ /* For board */
+ /* Ethernet RAVB */
+ #define CONFIG_BITBANGMII_MULTI
+diff --git a/include/configs/rzv2l-dev.h b/include/configs/rzv2l-dev.h
+index d686e463be..cecc60627f 100644
+--- a/include/configs/rzv2l-dev.h
++++ b/include/configs/rzv2l-dev.h
+@@ -47,11 +47,12 @@
+ #define CONFIG_EXTRA_ENV_SETTINGS	\
+ 	"bootm_size=0x10000000\0"
+
++#ifndef CONFIG_BOOTCOMMAND
+ #define CONFIG_BOOTCOMMAND	\
+ 	"tftp 0x48080000 Image; " \
+ 	"tftp 0x48000000 Image-"CONFIG_DEFAULT_FDT_FILE"; " \
+ 	"booti 0x48080000 - 0x48000000"
+-
++#endif
+ /* For board */
+ /* Ethernet RAVB */
+ #define CONFIG_BITBANGMII_MULTI
