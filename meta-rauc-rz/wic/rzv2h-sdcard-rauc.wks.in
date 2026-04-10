@@ -5,10 +5,10 @@ part --source rawcopy --sourceparams="file=fip-${MACHINE}.bin" --no-table ${FIP_
 part --source bootimg-partition --fstype=vfat --label boot --active --align 4 --fixed-size 64M
 
 # Partition 2: Rootfs A
-part / --source rootfs --fstype=ext4 --label root_A --align 4 --fixed-size 2048M
+part / --source rootfs --fstype=ext4 --label root_A --align 4 --fixed-size 2512M
 
 # Partition 3: Rootfs B
-part --source rootfs --fstype=ext4 --label root_B --align 4 --fixed-size 2048M
+part --source rootfs --fstype=ext4 --label root_B --align 4 --fixed-size 2512M
 
 # Partition 4: Data
 part --fstype=ext4 --label data --align 4 --size 1024M --no-fstab-update
